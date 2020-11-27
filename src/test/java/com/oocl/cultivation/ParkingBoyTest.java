@@ -31,7 +31,6 @@ class ParkingBoyTest {
     void should_parking_boy_call_parking_lot_fetch_function_once_when_fetch_a_car() throws UnrecognizedParkingTicketException {
         //given
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
-        Car car = new Car();
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
@@ -50,28 +49,23 @@ class ParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot(1);
         parkingLot.park(new Car());
         //when
-        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> {
-            parkingLot.park(new Car());
-        });
+        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> parkingLot.park(new Car()));
         //then
         assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
     }
 
     @Test
-    void unrecognized_parking_ticket_throw(){
+    void unrecognized_parking_ticket_throw() {
         //given
         ParkingLot parkingLot = new ParkingLot(1);
-        Car car = new Car();
         //when
-        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            parkingLot.fetch(new Ticket());
-        });
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> parkingLot.fetch(new Ticket()));
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
 
     @Test
-    void should_return_not_enough_position_exception_when_park_car_given_multiple_parking_lot_are_full() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+    void should_return_not_enough_position_exception_when_park_car_given_multiple_parking_lot_are_full() {
         //given
         Car car = new Car();
         ParkingLot parkingLot1 = new ParkingLot(0);
@@ -81,9 +75,7 @@ class ParkingBoyTest {
         parkingLotList.add(parkingLot2);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         //when
-        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> {
-            parkingBoy.park(car);
-        });
+        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> parkingBoy.park(car));
         //then
         assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
     }
@@ -101,16 +93,14 @@ class ParkingBoyTest {
         Ticket ticket = parkingBoy.park(car);
         //when
         parkingBoy.fetch(ticket);
-        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            parkingBoy.fetch(ticket);
-        });
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> parkingBoy.fetch(ticket));
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
 
 
     @Test
-    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_parking_ticket_and_multiple_parking_lot() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_parking_ticket_and_multiple_parking_lot() {
         //given
         ParkingLot parkingLot1 = new ParkingLot(0);
         ParkingLot parkingLot2 = new ParkingLot(9);
@@ -120,9 +110,7 @@ class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         Ticket ticket = new Ticket();
         //when
-        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            parkingBoy.fetch(ticket);
-        });
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> parkingBoy.fetch(ticket));
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }

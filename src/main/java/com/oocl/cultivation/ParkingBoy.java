@@ -3,7 +3,6 @@ package com.oocl.cultivation;
 import com.oocl.cultivation.exceptions.NotEnoughPositionException;
 import com.oocl.cultivation.exceptions.UnrecognizedParkingTicketException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingBoy {

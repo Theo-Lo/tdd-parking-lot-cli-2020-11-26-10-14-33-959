@@ -33,9 +33,7 @@ public class ParkingLotTest {
         assertNotNull(ticket1);
 
         //when
-        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> {
-            parkingLot.park(car2);
-        });
+        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> parkingLot.park(car2));
         //then
         assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
     }
@@ -54,7 +52,7 @@ public class ParkingLotTest {
         //then
         assertNotNull(ticket1);
         assertNotNull(ticket2);
-        assertNotEquals(ticket1,ticket2);
+        assertNotEquals(ticket1, ticket2);
     }
 
     @Test
@@ -83,23 +81,19 @@ public class ParkingLotTest {
         //then
         assertNotNull(firstFetch);
         //when
-        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            parkingLot.fetch(ticket);
-        });
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> parkingLot.fetch(ticket));
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
 
     @Test
-    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_parking_ticket(){
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_parking_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot(10);
         Ticket ticket = new Ticket();
 
         //when
-        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            parkingLot.fetch(ticket);
-        });
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> parkingLot.fetch(ticket));
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }

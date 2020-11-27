@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotServiceManagerTest {
     @Test
-    void should_contain_added_parking_boy_from_management_list_when_add_parking_boy_given_service_manager_adds_parking_boy(){
+    void should_contain_added_parking_boy_from_management_list_when_add_parking_boy_given_service_manager_adds_parking_boy() {
         //given
         ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), new HashSet<>());
 
@@ -57,7 +57,7 @@ public class ParkingLotServiceManagerTest {
     }
 
     @Test
-    void should_throw_parking_boy_not_in_management_list_when_assign_parking_boy_to_park_a_car_given_he_is_not_in_management_list() throws Exception {
+    void should_throw_parking_boy_not_in_management_list_when_assign_parking_boy_to_park_a_car_given_he_is_not_in_management_list() {
         //given
         Car car = new Car();
         List<ParkingLot> parkingLotList = new ArrayList<>();
@@ -69,9 +69,7 @@ public class ParkingLotServiceManagerTest {
         ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), parkingBoyList);
 
         //when
-        final ParkingBoyNotInManagementListException parkingBoyNotInManagementListException = assertThrows(ParkingBoyNotInManagementListException.class, () -> {
-            serviceManager.assignParkingBoyToPark(parkingBoy, car);
-        });
+        final ParkingBoyNotInManagementListException parkingBoyNotInManagementListException = assertThrows(ParkingBoyNotInManagementListException.class, () -> serviceManager.assignParkingBoyToPark(parkingBoy, car));
         //then
         assertEquals("ParkingBoy not in management list", parkingBoyNotInManagementListException.getMessage());
     }
@@ -114,15 +112,13 @@ public class ParkingLotServiceManagerTest {
         Ticket ticket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
 
         //when
-        final ParkingBoyNotInManagementListException parkingBoyNotInManagementListException = assertThrows(ParkingBoyNotInManagementListException.class, () -> {
-            serviceManager.assignParkingBoyToFetch(parkingBoy2, ticket);
-        });
+        final ParkingBoyNotInManagementListException parkingBoyNotInManagementListException = assertThrows(ParkingBoyNotInManagementListException.class, () -> serviceManager.assignParkingBoyToFetch(parkingBoy2, ticket));
         //then
         assertEquals("ParkingBoy not in management list", parkingBoyNotInManagementListException.getMessage());
     }
 
     @Test
-    void should_return_not_enough_position_exception_when_park_car_given_service_manager_assign_a_parking_boy_to_park() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+    void should_return_not_enough_position_exception_when_park_car_given_service_manager_assign_a_parking_boy_to_park() {
         //given
         Car car = new Car();
         ParkingLot parkingLot1 = new ParkingLot(0);
@@ -136,9 +132,7 @@ public class ParkingLotServiceManagerTest {
         ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), parkingBoyList);
 
         //when
-        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> {
-            serviceManager.assignParkingBoyToPark(superSmartParkingBoy, car);
-        });
+        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> serviceManager.assignParkingBoyToPark(superSmartParkingBoy, car));
         //then
         assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
     }
@@ -159,15 +153,13 @@ public class ParkingLotServiceManagerTest {
         Ticket ticket = serviceManager.assignParkingBoyToPark(superSmartParkingBoy, car);
         serviceManager.assignParkingBoyToFetch(superSmartParkingBoy, ticket);
         //when
-        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            serviceManager.assignParkingBoyToFetch(superSmartParkingBoy, ticket);
-        });
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> serviceManager.assignParkingBoyToFetch(superSmartParkingBoy, ticket));
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
 
     @Test
-    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_ticket_and_service_manager_assign_a_parking_boy_to_park() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_ticket_and_service_manager_assign_a_parking_boy_to_park() {
         //given
         ParkingLot parkingLot1 = new ParkingLot(0);
         ParkingLot parkingLot2 = new ParkingLot(9);
@@ -180,9 +172,7 @@ public class ParkingLotServiceManagerTest {
         ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), parkingBoyList);
         Ticket ticket = new Ticket();
         //when
-        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            serviceManager.assignParkingBoyToFetch(superSmartParkingBoy, ticket);
-        });
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> serviceManager.assignParkingBoyToFetch(superSmartParkingBoy, ticket));
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }

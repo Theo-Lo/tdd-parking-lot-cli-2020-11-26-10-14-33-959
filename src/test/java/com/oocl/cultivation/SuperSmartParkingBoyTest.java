@@ -40,7 +40,7 @@ public class SuperSmartParkingBoyTest {
     }
 
     @Test
-    void should_return_not_enough_position_exception_when_park_car_given_multiple_parking_lot_are_full() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+    void should_return_not_enough_position_exception_when_park_car_given_multiple_parking_lot_are_full() {
         //given
         Car car = new Car();
         ParkingLot parkingLot1 = new ParkingLot(0);
@@ -50,9 +50,7 @@ public class SuperSmartParkingBoyTest {
         parkingLotList.add(parkingLot2);
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
         //when
-        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> {
-            superSmartParkingBoy.park(car);
-        });
+        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> superSmartParkingBoy.park(car));
         //then
         assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
     }
@@ -70,15 +68,13 @@ public class SuperSmartParkingBoyTest {
         Ticket ticket = superSmartParkingBoy.park(car);
         //when
         superSmartParkingBoy.fetch(ticket);
-        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            superSmartParkingBoy.fetch(ticket);
-        });
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> superSmartParkingBoy.fetch(ticket));
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
 
     @Test
-    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_parking_ticket_and_multiple_parking_lot() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_parking_ticket_and_multiple_parking_lot() {
         //given
         ParkingLot parkingLot1 = new ParkingLot(0);
         ParkingLot parkingLot2 = new ParkingLot(9);
@@ -88,9 +84,7 @@ public class SuperSmartParkingBoyTest {
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
         Ticket ticket = new Ticket();
         //when
-        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            superSmartParkingBoy.fetch(ticket);
-        });
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> superSmartParkingBoy.fetch(ticket));
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
