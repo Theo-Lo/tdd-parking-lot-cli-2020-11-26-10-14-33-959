@@ -81,7 +81,6 @@ class ParkingBoyTest {
         //then
         assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
     }
-
     @Test
     void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_used_parking_ticket_and_multiple_parking_lot() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
         //given
@@ -101,6 +100,7 @@ class ParkingBoyTest {
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
+
 
     @Test
     void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_parking_ticket_and_multiple_parking_lot() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
