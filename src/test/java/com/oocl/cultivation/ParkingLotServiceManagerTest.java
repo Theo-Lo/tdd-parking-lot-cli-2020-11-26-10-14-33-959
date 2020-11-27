@@ -1,5 +1,6 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exceptions.NotEnoughPositionException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class ParkingLotServiceManagerTest {
     }
 
     @Test
-    void should_return_a_ticket_when_assign_parking_boy_to_park_a_car_given_he_is_assigned_to_that_parking_lot(){
+    void should_return_a_ticket_when_assign_parking_boy_to_park_a_car_given_he_is_assigned_to_that_parking_lot() throws Exception {
         //given
         Car car = new Car();
         List<ParkingLot> parkingLotList = new ArrayList<>();

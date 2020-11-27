@@ -1,5 +1,7 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exceptions.NotEnoughPositionException;
+
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,7 +22,7 @@ public class ParkingLotServiceManager extends ParkingBoy{
         return managementList;
     }
 
-    public Ticket assignParkingBoyToPark(ParkingBoy parkingBoy, Car car) {
-        return null;
+    public Ticket assignParkingBoyToPark(ParkingBoy parkingBoy, Car car) throws Exception {
+        return parkingBoy.park(car);
     }
 }
