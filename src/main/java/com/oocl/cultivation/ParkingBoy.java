@@ -7,12 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingBoy {
-    ParkingLot parkingLot;
-    List<ParkingLot> parkingLotList = new ArrayList<>();
-    public ParkingBoy(ParkingLot parkingLot){
-        this.parkingLot = parkingLot;
-        this.parkingLotList.add(parkingLot);
-    }
+    List<ParkingLot> parkingLotList;
 
     public ParkingBoy(List<ParkingLot> parkingLotList) {
         this.parkingLotList = parkingLotList;

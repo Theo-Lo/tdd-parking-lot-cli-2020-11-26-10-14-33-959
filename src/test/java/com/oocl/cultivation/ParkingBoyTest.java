@@ -31,8 +31,10 @@ class ParkingBoyTest {
     void should_parking_boy_call_parking_lot_fetch_function_once_when_fetch_a_car() throws UnrecognizedParkingTicketException {
         //given
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         Ticket ticket = new Ticket();
 
         //when
