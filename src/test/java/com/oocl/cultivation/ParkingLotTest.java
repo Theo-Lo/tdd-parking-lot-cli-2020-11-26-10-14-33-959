@@ -28,11 +28,15 @@ public class ParkingLotTest {
 
         //when
         final Ticket ticket1 = parkingLot.park(car1);
-        final Ticket ticket2 = parkingLot.park(car2);
-
         //then
         assertNotNull(ticket1);
-        assertNull(ticket2);
+
+        //when
+        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> {
+            parkingLot.park(car2);
+        });
+        //then
+        assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
     }
 
     @Test
