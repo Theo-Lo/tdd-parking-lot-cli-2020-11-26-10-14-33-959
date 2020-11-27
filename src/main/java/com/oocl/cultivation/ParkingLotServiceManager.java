@@ -1,11 +1,6 @@
 package com.oocl.cultivation;
 
-import com.oocl.cultivation.exceptions.NotEnoughPositionException;
 import com.oocl.cultivation.exceptions.ParkingBoyNotInManagementListException;
-import com.oocl.cultivation.exceptions.UnrecognizedParkingTicketException;
-
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 

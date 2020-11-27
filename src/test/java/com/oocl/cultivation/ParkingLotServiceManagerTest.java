@@ -1,6 +1,5 @@
 package com.oocl.cultivation;
 
-import com.oocl.cultivation.exceptions.NotEnoughPositionException;
 import com.oocl.cultivation.exceptions.ParkingBoyNotInManagementListException;
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +67,6 @@ public class ParkingLotServiceManagerTest {
         ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), parkingBoyList);
 
         //when
-        //when
         final ParkingBoyNotInManagementListException parkingBoyNotInManagementListException = assertThrows(ParkingBoyNotInManagementListException.class, () -> {
             serviceManager.assignParkingBoyToPark(parkingBoy, car);
         });
@@ -95,4 +93,5 @@ public class ParkingLotServiceManagerTest {
         //then
         assertEquals(car, serviceManager.assignParkingBoyToFetch(parkingBoy, ticket));
     }
+
 }
