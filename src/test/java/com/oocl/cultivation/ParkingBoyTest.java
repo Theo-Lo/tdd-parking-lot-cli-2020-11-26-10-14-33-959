@@ -1,6 +1,7 @@
 package com.oocl.cultivation;
 
 import com.oocl.cultivation.exceptions.NotEnoughPositionException;
+import com.oocl.cultivation.exceptions.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -45,6 +46,15 @@ class ParkingBoyTest {
             parkingLot.park(new Car("car2"));
         });
         assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
+    }
 
+    @Test
+    void unrecognized_parking_ticket_throw(){
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car("car1");
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            parkingLot.fetch(new Ticket(car.getLicense()));
+        });
+        assertEquals("Not Enough Position", UnrecognizedParkingTicketException.getMessage());
     }
 }
