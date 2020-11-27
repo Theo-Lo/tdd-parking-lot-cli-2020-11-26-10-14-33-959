@@ -2,19 +2,21 @@ package com.oocl.cultivation;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class ParkingLotServiceManager extends ParkingBoy{
-    List<ParkingBoy> managementList;
-    public ParkingLotServiceManager(List<ParkingLot> parkingLotList, List<ParkingBoy> managementList) {
+    HashSet<ParkingBoy> managementList;
+    public ParkingLotServiceManager(List<ParkingLot> parkingLotList, HashSet<ParkingBoy> managementList) {
         super(parkingLotList);
         this.managementList = managementList;
     }
 
-    public void addParkingBoy(List<ParkingBoy> managementList) {
+    public void addParkingBoy(HashSet<ParkingBoy> managementList) {
+        this.managementList.addAll(managementList);
     }
 
-    public List<ParkingBoy> getParkingBoysList() {
+    public HashSet<ParkingBoy> getParkingBoysList() {
         return managementList;
     }
 }
