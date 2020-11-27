@@ -88,12 +88,14 @@ public class ParkingLotServiceManagerTest {
         HashSet<ParkingBoy> parkingBoyList = new HashSet<>();
         parkingBoyList.add(parkingBoy);
         ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), parkingBoyList);
-
-        //when
         Ticket ticket = serviceManager.assignParkingBoyToPark(parkingBoy, car);
 
+        //when
+        Car actual = serviceManager.assignParkingBoyToFetch(parkingBoy, ticket);
+
+
         //then
-        assertEquals(car, serviceManager.assignParkingBoyToFetch(parkingBoy, ticket));
+        assertEquals(car, actual);
     }
 
     @Test
