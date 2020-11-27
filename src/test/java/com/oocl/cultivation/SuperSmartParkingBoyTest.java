@@ -26,7 +26,7 @@ public class SuperSmartParkingBoyTest {
         parkingLot1.park(car1);
         parkingLot1.park(car2);
         parkingLot1.park(car3);
-        parkingLot1.park(car4);
+        parkingLot2.park(car4);
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingLot1);
         parkingLotList.add(parkingLot2);
