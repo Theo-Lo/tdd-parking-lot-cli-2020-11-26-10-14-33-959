@@ -80,4 +80,22 @@ class ParkingBoyTest {
         assertNotNull(ticket2);
         assertEquals(car2, parkingLot2.fetch(ticket2));
     }
+
+    @Test
+    void should_return_car_when_fetch_car_given_car_is_in_parking_lot_2() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+        //given
+        Car car = new Car();
+        Car car2 = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(10);
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingLot1);
+        parkingLotList.add(parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        parkingBoy.park(car);
+        //when
+        Car actual = parkingLot2.fetch(parkingBoy.park(car2));
+        //then
+        assertEquals(car2, actual);
+    }
 }
