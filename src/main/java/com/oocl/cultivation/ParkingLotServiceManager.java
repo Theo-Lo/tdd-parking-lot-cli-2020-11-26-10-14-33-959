@@ -29,7 +29,7 @@ public class ParkingLotServiceManager extends ParkingBoy{
         return parkingBoy.park(car);
     }
 
-    public Car assignParkingBoyToFetch(ParkingBoy parkingBoy, Ticket ticket) throws UnrecognizedParkingTicketException {
-        return null;
+    public Car assignParkingBoyToFetch(ParkingBoy parkingBoy, Ticket ticket) throws Exception {
+        return parkingBoy.fetch(ticket);
     }
 }
