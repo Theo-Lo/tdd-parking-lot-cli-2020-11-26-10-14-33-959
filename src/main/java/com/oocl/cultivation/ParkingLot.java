@@ -1,6 +1,7 @@
 package com.oocl.cultivation;
 
 import com.oocl.cultivation.exceptions.NotEnoughPositionException;
+import com.oocl.cultivation.exceptions.UnrecognizedParkingTicketException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +32,12 @@ public class ParkingLot {
         return ticket;
     }
 
-    public Car fetch(Ticket ticket) {
+    public Car fetch(Ticket ticket) throws UnrecognizedParkingTicketException {
         Car car = this.carTicketHashMap.get(ticket);
         this.carTicketHashMap.remove(ticket);
+        if(car==null){
+            throw new UnrecognizedParkingTicketException();
+        }
         return car;
 //        if(ticket.getUsed()){
 //            return null;

@@ -1,6 +1,7 @@
 package com.oocl.cultivation;
 
 import com.oocl.cultivation.exceptions.NotEnoughPositionException;
+import com.oocl.cultivation.exceptions.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,7 +58,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_car_when_fetch_car_given_valid_parking_ticket_parking_lot_that_parked_the_car() throws NotEnoughPositionException {
+    void should_return_car_when_fetch_car_given_valid_parking_ticket_parking_lot_that_parked_the_car() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
         //given
         ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car("car1");
@@ -71,7 +72,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_used_parking_ticket() throws NotEnoughPositionException {
+    void should_return_null_when_fetch_car_given_used_parking_ticket() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
         //given
         ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car("car1");
@@ -79,23 +80,27 @@ public class ParkingLotTest {
 
         //when
         final Car firstFetch = parkingLot.fetch(ticket);
-        final Car secondFetch = parkingLot.fetch(ticket);
-
         //then
         assertNotNull(firstFetch);
-        assertNull(secondFetch);
+        //when
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            parkingLot.fetch(ticket);
+        });
+        //then
+        assertEquals("Not Enough Position", UnrecognizedParkingTicketException.getMessage());
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_invalid_parking_ticket(){
+    void should_return_null_when_fetch_car_given_invalid_parking_ticket() throws UnrecognizedParkingTicketException {
         //given
         ParkingLot parkingLot = new ParkingLot(10);
         Ticket ticket = new Ticket("Wrong License");
 
         //when
-        final Car wrongFetch = parkingLot.fetch(ticket);
-
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            parkingLot.fetch(ticket);
+        });
         //then
-        assertNull(wrongFetch);
+        assertEquals("Not Enough Position", UnrecognizedParkingTicketException.getMessage());
     }
 }
