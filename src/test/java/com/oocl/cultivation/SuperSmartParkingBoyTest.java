@@ -1,13 +1,14 @@
 package com.oocl.cultivation;
 
 import com.oocl.cultivation.exceptions.NotEnoughPositionException;
+import com.oocl.cultivation.exceptions.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SuperSmartParkingBoyTest {
     @Test
@@ -36,5 +37,61 @@ public class SuperSmartParkingBoyTest {
         //then
         assertNotNull(ticket);
         assertEquals(car5, parkingLot2.fetch(ticket));
+    }
+
+    @Test
+    void should_return_not_enough_position_exception_when_park_car_given_multiple_parking_lot_are_full() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+        //given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(0);
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingLot1);
+        parkingLotList.add(parkingLot2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        //when
+        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> {
+            superSmartParkingBoy.park(car);
+        });
+        //then
+        assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
+    }
+
+    @Test
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_used_parking_ticket_and_multiple_parking_lot() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+        //given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(9);
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingLot1);
+        parkingLotList.add(parkingLot2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        Ticket ticket = superSmartParkingBoy.park(car);
+        //when
+        superSmartParkingBoy.fetch(ticket);
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            superSmartParkingBoy.fetch(ticket);
+        });
+        //then
+        assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
+    }
+
+    @Test
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_parking_ticket_and_multiple_parking_lot() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+        //given
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(9);
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingLot1);
+        parkingLotList.add(parkingLot2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        Ticket ticket = new Ticket();
+        //when
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            superSmartParkingBoy.fetch(ticket);
+        });
+        //then
+        assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
 }

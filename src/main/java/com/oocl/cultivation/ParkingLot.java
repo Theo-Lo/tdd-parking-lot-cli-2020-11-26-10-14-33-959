@@ -40,6 +40,7 @@ public class ParkingLot {
     }
 
     public Double getAvailableRatio(){
+        if(capacity == 0) return 0.0;
         return getEmptyPosition().doubleValue()/capacity;
     }
 }
