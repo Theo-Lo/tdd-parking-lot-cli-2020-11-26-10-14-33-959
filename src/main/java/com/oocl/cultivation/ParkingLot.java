@@ -34,4 +34,8 @@ public class ParkingLot {
         }
         return car;
     }
+
+    public Integer getEmptyPosition(){
+        return capacity - this.carTicketHashMap.size();
+    }
 }
