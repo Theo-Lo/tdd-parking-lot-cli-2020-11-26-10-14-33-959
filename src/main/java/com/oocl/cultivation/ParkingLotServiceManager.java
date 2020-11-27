@@ -19,4 +19,8 @@ public class ParkingLotServiceManager extends ParkingBoy{
     public HashSet<ParkingBoy> getParkingBoysList() {
         return managementList;
     }
+
+    public Ticket assignParkingBoyToPark(ParkingBoy parkingBoy, Car car) {
+        return null;
+    }
 }
