@@ -10,7 +10,7 @@ public class ParkingLotTest {
     @Test
     void should_return_a_parking_ticket_when_park_the_car_given_a_car_and_parking_lot_with_available_capacity() throws NotEnoughPositionException {
         //given
-        Car car = new Car("car1");
+        Car car = new Car();
         ParkingLot parkingLot = new ParkingLot(10);
 
         //when
@@ -23,8 +23,8 @@ public class ParkingLotTest {
     @Test
     void should_only_one_car_parked_when_park_multiple_cars_given_multiple_car_and_parking_lot_with_1_capacity() throws NotEnoughPositionException {
         //given
-        Car car1 = new Car("car1");
-        Car car2 = new Car("car2");
+        Car car1 = new Car();
+        Car car2 = new Car();
         ParkingLot parkingLot = new ParkingLot(1);
 
         //when
@@ -43,8 +43,8 @@ public class ParkingLotTest {
     @Test
     void should_be_parked_when_park_multiple_cars_given_multiple_car_and_parking_lot_with_available_capacity() throws NotEnoughPositionException {
         //given
-        Car car1 = new Car("car1");
-        Car car2 = new Car("car2");
+        Car car1 = new Car();
+        Car car2 = new Car();
         ParkingLot parkingLot = new ParkingLot(2);
 
         //when
@@ -61,7 +61,7 @@ public class ParkingLotTest {
     void should_return_car_when_fetch_car_given_valid_parking_ticket_parking_lot_that_parked_the_car() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
         //given
         ParkingLot parkingLot = new ParkingLot(10);
-        Car car = new Car("car1");
+        Car car = new Car();
         Ticket ticket = parkingLot.park(car);
 
         //when
@@ -72,10 +72,10 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_used_parking_ticket() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_used_parking_ticket() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
         //given
         ParkingLot parkingLot = new ParkingLot(10);
-        Car car = new Car("car1");
+        Car car = new Car();
         Ticket ticket = parkingLot.park(car);
 
         //when
@@ -91,10 +91,10 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_invalid_parking_ticket(){
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_parking_ticket(){
         //given
         ParkingLot parkingLot = new ParkingLot(10);
-        Ticket ticket = new Ticket("Wrong License");
+        Ticket ticket = new Ticket();
 
         //when
         final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {

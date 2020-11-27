@@ -15,7 +15,7 @@ class ParkingBoyTest {
         //given
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        Car car = new Car("car1");
+        Car car = new Car();
         //when
         parkingBoy.park(car);
         //then
@@ -28,8 +28,8 @@ class ParkingBoyTest {
         //given
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        Car car = new Car("car1");
-        Ticket ticket = new Ticket(car.getLicense());
+        Car car = new Car();
+        Ticket ticket = new Ticket();
 
         //when
         parkingBoy.fetch(ticket);
@@ -41,9 +41,9 @@ class ParkingBoyTest {
     @Test
     void not_enough_position_throw() throws NotEnoughPositionException {
         ParkingLot parkingLot = new ParkingLot(1);
-        parkingLot.park(new Car("car1"));
+        parkingLot.park(new Car());
         final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> {
-            parkingLot.park(new Car("car2"));
+            parkingLot.park(new Car());
         });
         assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
     }
@@ -51,9 +51,9 @@ class ParkingBoyTest {
     @Test
     void unrecognized_parking_ticket_throw(){
         ParkingLot parkingLot = new ParkingLot(1);
-        Car car = new Car("car1");
+        Car car = new Car();
         final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
-            parkingLot.fetch(new Ticket(car.getLicense()));
+            parkingLot.fetch(new Ticket());
         });
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
