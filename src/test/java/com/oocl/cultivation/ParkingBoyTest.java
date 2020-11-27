@@ -19,4 +19,19 @@ class ParkingBoyTest {
         verify(parkingLot, times(1)).park(car);
 
     }
+
+    @Test
+    void should_parking_boy_call_parking_lot_fetch_function_once_when_fetch_a_car() {
+        //given
+        ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car("car1");
+        Ticket ticket = new Ticket(car.getLicense());
+
+        //when
+        parkingBoy.fetch(ticket);
+
+        //then
+        verify(parkingLot, times(1)).fetch(ticket);
+    }
 }
