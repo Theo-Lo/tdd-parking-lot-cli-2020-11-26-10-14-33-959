@@ -1,12 +1,13 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exceptions.NotEnoughPositionException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
     @Test
-    void should_return_a_parking_ticket_when_park_the_car_given_a_car_and_parking_lot_with_available_capacity(){
+    void should_return_a_parking_ticket_when_park_the_car_given_a_car_and_parking_lot_with_available_capacity() throws NotEnoughPositionException {
         //given
         Car car = new Car("car1");
         ParkingLot parkingLot = new ParkingLot(10);
@@ -19,7 +20,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_only_one_car_parked_when_park_multiple_cars_given_multiple_car_and_parking_lot_with_1_capacity(){
+    void should_only_one_car_parked_when_park_multiple_cars_given_multiple_car_and_parking_lot_with_1_capacity() throws NotEnoughPositionException {
         //given
         Car car1 = new Car("car1");
         Car car2 = new Car("car2");
@@ -35,7 +36,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_be_parked_when_park_multiple_cars_given_multiple_car_and_parking_lot_with_available_capacity(){
+    void should_be_parked_when_park_multiple_cars_given_multiple_car_and_parking_lot_with_available_capacity() throws NotEnoughPositionException {
         //given
         Car car1 = new Car("car1");
         Car car2 = new Car("car2");
@@ -52,7 +53,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_car_when_fetch_car_given_valid_parking_ticket_parking_lot_that_parked_the_car(){
+    void should_return_car_when_fetch_car_given_valid_parking_ticket_parking_lot_that_parked_the_car() throws NotEnoughPositionException {
         //given
         ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car("car1");
@@ -66,7 +67,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_used_parking_ticket(){
+    void should_return_null_when_fetch_car_given_used_parking_ticket() throws NotEnoughPositionException {
         //given
         ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car("car1");

@@ -1,5 +1,7 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exceptions.NotEnoughPositionException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -16,12 +18,12 @@ public class ParkingLot {
         this.carTicketHashMap = new HashMap<>();
     }
 
-    public Ticket park(Car car){
+    public Ticket park(Car car) throws NotEnoughPositionException {
 //        if(capacity - this.cars.size() == 0){
 //            return null;
 //        }
         if(this.carTicketHashMap.size() >= capacity){
-            return null;
+            throw new NotEnoughPositionException();
         }
         Ticket ticket = new Ticket(car.getLicense());
 //        cars.add(car);
