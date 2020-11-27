@@ -80,4 +80,17 @@ public class ParkingLotTest {
         assertNotNull(firstFetch);
         assertNull(secondFetch);
     }
+
+    @Test
+    void should_return_null_when_fetch_car_given_invalid_parking_ticket(){
+        //given
+        ParkingLot parkingLot = new ParkingLot(10);
+        Ticket ticket = new Ticket("Wrong License");
+
+        //when
+        final Car wrongFetch = parkingLot.fetch(ticket);
+
+        //then
+        assertNull(wrongFetch);
+    }
 }
