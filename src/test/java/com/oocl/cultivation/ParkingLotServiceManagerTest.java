@@ -1,6 +1,7 @@
 package com.oocl.cultivation;
 
 import com.oocl.cultivation.exceptions.NotEnoughPositionException;
+import com.oocl.cultivation.exceptions.ParkingBoyNotInManagementListException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -52,5 +53,26 @@ public class ParkingLotServiceManagerTest {
 
         //then
         assertNotNull(ticket);
+    }
+
+    @Test
+    void should_throw_parking_boy_not_in_management_list_when_assign_parking_boy_to_park_a_car_given_he_is_not_in_management_list() throws Exception {
+        //given
+        Car car = new Car();
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        ParkingLot parkingLot = new ParkingLot(10);
+        parkingLotList.add(parkingLot);
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        HashSet<ParkingBoy> parkingBoyList = new HashSet<>();
+        ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), parkingBoyList);
+
+        //when
+        //when
+        final ParkingBoyNotInManagementListException parkingBoyNotInManagementListException = assertThrows(ParkingBoyNotInManagementListException.class, () -> {
+            serviceManager.assignParkingBoyToPark(parkingBoy, car);
+        });
+        //then
+        assertEquals("ParkingBoy not in management list", parkingBoyNotInManagementListException.getMessage());
     }
 }
