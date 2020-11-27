@@ -184,4 +184,20 @@ public class ParkingLotServiceManagerTest {
         //then
         assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
+
+    @Test
+    void should_return_a_ticket_when_park_given_a_car_and_service_manager() throws Exception {
+        //given
+        Car car = new Car();
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        ParkingLot parkingLot = new ParkingLot(10);
+        parkingLotList.add(parkingLot);
+        ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(parkingLotList, new HashSet<>());
+
+        //when
+        Ticket ticket = serviceManager.park(car);
+
+        //then
+        assertNotNull(ticket);
+    }
 }
