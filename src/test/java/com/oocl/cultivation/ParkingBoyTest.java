@@ -55,6 +55,6 @@ class ParkingBoyTest {
         final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
             parkingLot.fetch(new Ticket(car.getLicense()));
         });
-        assertEquals("Not Enough Position", UnrecognizedParkingTicketException.getMessage());
+        assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
 }

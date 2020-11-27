@@ -87,7 +87,7 @@ public class ParkingLotTest {
             parkingLot.fetch(ticket);
         });
         //then
-        assertEquals("Not Enough Position", UnrecognizedParkingTicketException.getMessage());
+        assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
 
     @Test
@@ -101,6 +101,6 @@ public class ParkingLotTest {
             parkingLot.fetch(ticket);
         });
         //then
-        assertEquals("Not Enough Position", UnrecognizedParkingTicketException.getMessage());
+        assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
     }
 }
