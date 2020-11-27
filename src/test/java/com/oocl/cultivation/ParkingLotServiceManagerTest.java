@@ -1,6 +1,8 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exceptions.NotEnoughPositionException;
 import com.oocl.cultivation.exceptions.ParkingBoyNotInManagementListException;
+import com.oocl.cultivation.exceptions.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -117,4 +119,69 @@ public class ParkingLotServiceManagerTest {
         assertEquals("ParkingBoy not in management list", parkingBoyNotInManagementListException.getMessage());
     }
 
+    @Test
+    void should_return_not_enough_position_exception_when_park_car_given_service_manager_assign_a_parking_boy_to_park() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+        //given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(0);
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingLot1);
+        parkingLotList.add(parkingLot2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        HashSet<ParkingBoy> parkingBoyList = new HashSet<>();
+        parkingBoyList.add(superSmartParkingBoy);
+        ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), parkingBoyList);
+
+        //when
+        final NotEnoughPositionException notEnoughPositionException = assertThrows(NotEnoughPositionException.class, () -> {
+            serviceManager.assignParkingBoyToPark(superSmartParkingBoy, car);
+        });
+        //then
+        assertEquals("Not Enough Position", notEnoughPositionException.getMessage());
+    }
+
+    @Test
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_used_ticket_and_service_manager_assign_a_parking_boy_to_park() throws Exception {
+        //given
+        Car car = new Car();
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(9);
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingLot1);
+        parkingLotList.add(parkingLot2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        HashSet<ParkingBoy> parkingBoyList = new HashSet<>();
+        parkingBoyList.add(superSmartParkingBoy);
+        ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), parkingBoyList);
+        Ticket ticket = serviceManager.assignParkingBoyToPark(superSmartParkingBoy, car);
+        serviceManager.assignParkingBoyToFetch(superSmartParkingBoy, ticket);
+        //when
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            serviceManager.assignParkingBoyToFetch(superSmartParkingBoy, ticket);
+        });
+        //then
+        assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
+    }
+
+    @Test
+    void should_return_unrecognized_parking_ticket_exception_when_fetch_car_given_invalid_ticket_and_service_manager_assign_a_parking_boy_to_park() throws NotEnoughPositionException, UnrecognizedParkingTicketException {
+        //given
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot(9);
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingLot1);
+        parkingLotList.add(parkingLot2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotList);
+        HashSet<ParkingBoy> parkingBoyList = new HashSet<>();
+        parkingBoyList.add(superSmartParkingBoy);
+        ParkingLotServiceManager serviceManager = new ParkingLotServiceManager(new ArrayList<>(), parkingBoyList);
+        Ticket ticket = new Ticket();
+        //when
+        final UnrecognizedParkingTicketException UnrecognizedParkingTicketException = assertThrows(UnrecognizedParkingTicketException.class, () -> {
+            serviceManager.assignParkingBoyToFetch(superSmartParkingBoy, ticket);
+        });
+        //then
+        assertEquals("Unrecognized parking ticket", UnrecognizedParkingTicketException.getMessage());
+    }
 }
